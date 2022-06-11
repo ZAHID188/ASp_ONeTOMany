@@ -26,6 +26,8 @@ namespace relationshipAPI.Controllers
         {
             var charecters = await _context.Charecters
                 .Where(c => c.UserId == user)
+                .Include(c=> c.weapon)
+                .Include(c=> c.Skillss)
                 .ToListAsync();
 
             return charecters;
@@ -47,8 +49,54 @@ namespace relationshipAPI.Controllers
                 User = user,
             };
             _context.Charecters.Add(newCharecter);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();  
             return await Get(newCharecter.UserId);
+        }
+
+
+        [HttpPost("weapon")]
+        public async Task<ActionResult<Charecter>> AddWeapon(weaponDTO weapondto)
+        {
+            var charecter = await _context.Charecters.FindAsync(weapondto.CharecterID);
+            if (charecter == null)
+            {
+                return NotFound();
+            }
+
+            var newweapon = new weapon
+            {
+                Name = weapondto.Name,  
+                damage = weapondto.Damage,
+                Charecter = charecter,
+            };
+            _context.weapons.Add(newweapon);
+            await _context.SaveChangesAsync();
+            return charecter;
+        }
+
+
+
+
+        [HttpPost("Skill")]
+        public async Task<ActionResult<Charecter>> AddCharSkill(skillsDto dto)
+        {
+            var charecter = await _context.Charecters
+                .Where(c=>c.Id==dto.CharecterID)
+                .Include(c=> c.Skillss )
+                .FirstOrDefaultAsync();
+            if (charecter == null)
+            {
+                return NotFound();
+            }
+            var skill = await _context.Skillls.FindAsync(dto.SkillID);
+            if (skill == null)
+            {
+                return NotFound();
+            }
+            
+            charecter.Skillss.Add(skill);   
+            await _context.SaveChangesAsync();
+            return charecter;
         }
 
 

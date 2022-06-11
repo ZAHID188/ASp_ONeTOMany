@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using relationshipAPI.Data;
 
@@ -10,9 +11,10 @@ using relationshipAPI.Data;
 namespace relationshipAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220611055445_weapon")]
+    partial class weapon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,21 +22,6 @@ namespace relationshipAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CharecterSkills", b =>
-                {
-                    b.Property<int>("CharectersId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SkillssId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CharectersId", "SkillssId");
-
-                    b.HasIndex("SkillssId");
-
-                    b.ToTable("CharecterSkills");
-                });
 
             modelBuilder.Entity("relationshipAPI.Model.Charecter", b =>
                 {
@@ -60,26 +47,6 @@ namespace relationshipAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Charecters");
-                });
-
-            modelBuilder.Entity("relationshipAPI.Model.Skills", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Damage")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Skillls");
                 });
 
             modelBuilder.Entity("relationshipAPI.Model.User", b =>
@@ -123,21 +90,6 @@ namespace relationshipAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("weapons");
-                });
-
-            modelBuilder.Entity("CharecterSkills", b =>
-                {
-                    b.HasOne("relationshipAPI.Model.Charecter", null)
-                        .WithMany()
-                        .HasForeignKey("CharectersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("relationshipAPI.Model.Skills", null)
-                        .WithMany()
-                        .HasForeignKey("SkillssId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("relationshipAPI.Model.Charecter", b =>

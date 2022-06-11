@@ -13,5 +13,16 @@ namespace relationshipAPI.Model
         public User User { get; set; }
         public int UserId { get; set; }
 
+        //many to many
+
+        public weapon weapon { get; set; }
+
+        //
+        public List<Skills> Skillss { get; set; }
+
+
+
+
+
     }
 }

@@ -12,8 +12,10 @@ namespace relationshipAPI.Data
 
         public DbSet<User> users { get; set; } 
         public DbSet<Charecter> Charecters { get; set; }
-       /*  public DbSet<AppStudent> Students { get; set; }
-        */
+        public DbSet<weapon> weapons { get; set; }
+        public DbSet<Skills> Skillls { get; set; }
+
+
 
     }
 }

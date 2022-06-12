@@ -9,6 +9,7 @@ namespace relationshipAPI.Data.Helper
         public AutoMapperProfile()
         {
             CreateMap<Blog12M, Blog12M_Dto>();
+            CreateMap<BlogUpdateDto, Blog12M>();
             CreateMap<Post, Post_Dto>();
 
 

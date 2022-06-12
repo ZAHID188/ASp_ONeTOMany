@@ -54,7 +54,30 @@ namespace relationshipAPI.Data.Repository
 
         public void Update(Blog12M blog)
         {
-            _data.Entry(blog).State = EntityState.Modified; 
+            _data.Update(blog);
+            SaveAllAsync();
+
+            // _data.Entry(blog).State = EntityState.Modified;
+
         }
+        public async Task<bool> UpdateSingle(Blog12M blog)
+        {
+             _data.Update(blog);
+            return await SaveAllAsync();
+        }
+
+        public async Task<bool> DeleteBlog(Blog12M blog)
+        {
+            
+            _data.Blog12Ms.Remove(blog);
+            return await SaveAllAsync();
+
+
+
+
+
+
+        }
+
     }
 }

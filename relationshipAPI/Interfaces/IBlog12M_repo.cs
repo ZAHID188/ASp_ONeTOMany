@@ -6,6 +6,10 @@ namespace relationshipAPI.Interfaces
     {
         void Update(Blog12M blog);
         Task<bool> SaveAllAsync();
+        Task<bool> UpdateSingle(Blog12M blog);
+        Task<bool> DeleteBlog(Blog12M blog);
+
+
         Task<bool> SaveAsync(Blog12M blog);
 
         Task<IEnumerable<Blog12M>> GetBlogAsync();

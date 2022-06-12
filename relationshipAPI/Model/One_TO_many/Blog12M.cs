@@ -10,6 +10,6 @@ namespace relationshipAPI.Model.One_TO_many
         public string Url { get; set; }
 
       
-        public ICollection<Post> Posts { get; set; }
+        public List<Post> Posts { get; set; }
     }
 }

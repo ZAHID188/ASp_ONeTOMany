@@ -1,0 +1,70 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using relationshipAPI.Data;
+using relationshipAPI.Data.Dtos.One_TO_Many;
+using relationshipAPI.Model.One_TO_many;
+
+namespace relationshipAPI.Controllers.OneToMany
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class One2M : ControllerBase
+    {
+        private readonly DataContext _dt;
+        private readonly IMapper _mapper;
+
+        public One2M(DataContext dt,IMapper mapper)
+        {
+            _dt = dt;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult <List<Blog12M_Dto>>> Get()
+        {
+            var blogs = await _dt.Blog12Ms
+                .Include(c => c.Posts)
+                .ToListAsync(); 
+
+            return _mapper.Map<List<Blog12M_Dto>>(blogs);
+
+        }
+
+        [HttpPost("Create")]
+
+        public async Task<ActionResult<Blog12M>> PostBlog(Blog12M blog)
+        {
+            if (_dt.Blog12Ms == null)
+            {
+                return Problem("Entity set 'DataContext.blogs'  is null.");
+            }
+            _dt.Blog12Ms.Add(blog);
+            await _dt.SaveChangesAsync();
+
+            return  RedirectToAction("Index");//CreatedAtAction("GetBlog", new { id = blog.BlogId }, blog);
+        }
+       /* public async Task<ActionResult<List<Blog12M_Dto>>> CreateBlog(Blog12M_Dto dto)
+        {
+           
+          
+            var NewBlog = new Blog12M
+            {
+               
+                Url = dto.Url
+
+
+            };
+            var blog=_dt.Blog12Ms.Add(NewBlog);
+            _mapper.Map<Blog12M_Dto>(blog);
+            
+             await _dt.SaveChangesAsync();
+            return RedirectToAction("Index");
+
+
+
+        }*/
+        
+    }
+}

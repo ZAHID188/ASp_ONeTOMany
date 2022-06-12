@@ -69,7 +69,7 @@ namespace relationshipAPI.Controllers
                 damage = weapondto.Damage,
                 Charecter = charecter,
             };
-            _context.weapons.Add(newweapon);
+            _context.weapons.Add(newweapon);    
             await _context.SaveChangesAsync();
             return charecter;
         }

@@ -15,6 +15,9 @@ using Microsoft.Extensions.Logging;
 
 using Microsoft.OpenApi.Models;
 using relationshipAPI.Data;
+using relationshipAPI.Data.Helper;
+using relationshipAPI.Data.Repository;
+using relationshipAPI.Interfaces;
 
 namespace API
 {
@@ -42,27 +45,32 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv6", Version = "v1" });
             });
-         /*   services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
+            services.AddScoped<IBlog12M_repo, Blog12M_repository>();
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+            services.AddControllers(
+                    options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+
+            /*   services.AddAuthentication(options =>
+               {
+                   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+               }).AddJwtBearer(options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = true,
+                       ValidateIssuerSigningKey = true,
 
 
-                    ValidIssuer = "http://localhost:4200",
-                    ValidAudience = "http://localhost:4200",
-                    IssuerSigningKey =new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey"))
+                       ValidIssuer = "http://localhost:4200",
+                       ValidAudience = "http://localhost:4200",
+                       IssuerSigningKey =new SymmetricSecurityKey(Encoding.UTF8.GetBytes("supersecretkey"))
 
-                };
+                   };
 
-            });*/
+               });*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

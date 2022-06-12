@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "lwjkV7xh6uRXMPY+wgbBwpgvuWzA5bvy0tdWFgUUyoA5FpjeFGNGpZT6TNX1hYuaJw2ODuDbkZmKQGurzPLY1w==",
+  "dgSpecHash": "yTQbb0b6PI/2Brg0fBfX8531g9UAo2LXkZZP8xVYrQARCjzzz+TPVQVVlSp7ZiHE6PEYXUi/dy0haZp1TfSuOQ==",
   "success": true,
-  "projectFilePath": "E:\\Desktop\\18 feb 2022\\clean\\Angular and asp.net\\ASP.net\\Projects\\relationshipAPI\\relationshipAPI\\relationshipAPI.csproj",
+  "projectFilePath": "E:\\Desktop\\18_feb_2022\\clean\\Angular and asp.net\\ASP.net\\Projects\\relationshipAPI\\relationshipAPI\\relationshipAPI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Century\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
+    "C:\\Users\\Century\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
@@ -28,7 +30,7 @@
     "C:\\Users\\Century\\.nuget\\packages\\microsoft.codeanalysis.visualbasic.workspaces\\4.0.0\\microsoft.codeanalysis.visualbasic.workspaces.4.0.0.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\microsoft.codeanalysis.workspaces.common\\4.0.0\\microsoft.codeanalysis.workspaces.common.4.0.0.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\microsoft.codeanalysis.workspaces.msbuild\\4.0.0\\microsoft.codeanalysis.workspaces.msbuild.4.0.0.nupkg.sha512",
-    "C:\\Users\\Century\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Century\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\Century\\.nuget\\packages\\microsoft.diasymreader\\1.3.0\\microsoft.diasymreader.1.3.0.nupkg.sha512",

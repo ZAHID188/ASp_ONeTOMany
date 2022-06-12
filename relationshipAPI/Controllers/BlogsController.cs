@@ -6,63 +6,61 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using relationshipAPI.Data;
-using relationshipAPI.Model;
+using relationshipAPI.Model.One_TO_One;
 
 namespace relationshipAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class BlogsController : ControllerBase
     {
         private readonly DataContext _context;
 
-        public UsersController(DataContext context)
+        public BlogsController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Blogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Getusers()
+        public async Task<ActionResult<IEnumerable<Blog>>> Getblogs()
         {
-          if (_context.users == null)
+          if (_context.blogs == null)
           {
               return NotFound();
           }
-            return await _context.users
-                .Include(c=>c.Charecters)
-                .ToListAsync();
+            return await _context.blogs.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Blogs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Blog>> GetBlog(int id)
         {
-          if (_context.users == null)
+          if (_context.blogs == null)
           {
               return NotFound();
           }
-            var user = await _context.users.FindAsync(id);
+            var blog = await _context.blogs.FindAsync(id);
 
-            if (user == null)
+            if (blog == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return blog;
         }
 
-        // PUT: api/Users/5
+        // PUT: api/Blogs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutBlog(int id, Blog blog)
         {
-            if (id != user.Id)
+            if (id != blog.BlogId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(blog).State = EntityState.Modified;
 
             try
             {
@@ -70,7 +68,7 @@ namespace relationshipAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!BlogExists(id))
                 {
                     return NotFound();
                 }
@@ -83,44 +81,44 @@ namespace relationshipAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Blogs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Blog>> PostBlog(Blog blog)
         {
-          if (_context.users == null)
+          if (_context.blogs == null)
           {
-              return Problem("Entity set 'DataContext.users'  is null.");
+              return Problem("Entity set 'DataContext.blogs'  is null.");
           }
-            _context.users.Add(user);
+            _context.blogs.Add(blog);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetBlog", new { id = blog.BlogId }, blog);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Blogs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteBlog(int id)
         {
-            if (_context.users == null)
+            if (_context.blogs == null)
             {
                 return NotFound();
             }
-            var user = await _context.users.FindAsync(id);
-            if (user == null)
+            var blog = await _context.blogs.FindAsync(id);
+            if (blog == null)
             {
                 return NotFound();
             }
 
-            _context.users.Remove(user);
+            _context.blogs.Remove(blog);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        private bool BlogExists(int id)
         {
-            return (_context.users?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.blogs?.Any(e => e.BlogId == id)).GetValueOrDefault();
         }
     }
 }

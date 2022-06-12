@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using relationshipAPI.Data;
 
@@ -10,9 +11,10 @@ using relationshipAPI.Data;
 namespace relationshipAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220611122042_one_to_one")]
+    partial class one_to_one
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,49 +62,6 @@ namespace relationshipAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Charecters");
-                });
-
-            modelBuilder.Entity("relationshipAPI.Model.One_TO_many.Blog12M", b =>
-                {
-                    b.Property<int>("BlogId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BlogId"), 1L, 1);
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("BlogId");
-
-                    b.ToTable("Blog12Ms");
-                });
-
-            modelBuilder.Entity("relationshipAPI.Model.One_TO_many.Post", b =>
-                {
-                    b.Property<int>("PostId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PostId"), 1L, 1);
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PostId");
-
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("relationshipAPI.Model.One_TO_One.Blog", b =>
@@ -234,17 +193,6 @@ namespace relationshipAPI.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("relationshipAPI.Model.One_TO_many.Post", b =>
-                {
-                    b.HasOne("relationshipAPI.Model.One_TO_many.Blog12M", "Blog")
-                        .WithMany("Posts")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-                });
-
             modelBuilder.Entity("relationshipAPI.Model.One_TO_One.Blogtype", b =>
                 {
                     b.HasOne("relationshipAPI.Model.One_TO_One.Blog", "Blogs")
@@ -271,11 +219,6 @@ namespace relationshipAPI.Migrations
                 {
                     b.Navigation("weapon")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("relationshipAPI.Model.One_TO_many.Blog12M", b =>
-                {
-                    b.Navigation("Posts");
                 });
 
             modelBuilder.Entity("relationshipAPI.Model.One_TO_One.Blog", b =>

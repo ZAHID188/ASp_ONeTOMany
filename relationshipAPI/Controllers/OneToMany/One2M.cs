@@ -45,7 +45,7 @@ namespace relationshipAPI.Controllers.OneToMany
         }
 
        [HttpPost]
-        public async Task<ActionResult<Blog12M>> CreateBlog(Blog12M dto)
+        public async Task<ActionResult<Blog12M>> CreateBlog(BlogUpdateDto dto)
         {
             await _repo.SaveAsync(dto);
 
@@ -57,6 +57,8 @@ namespace relationshipAPI.Controllers.OneToMany
             return Ok(userToReturn);
 
         }
+
+    
 
         [HttpPut]
         public  async Task<ActionResult> UpdateBlog(BlogUpdateDto blog)
@@ -77,6 +79,60 @@ namespace relationshipAPI.Controllers.OneToMany
             var blogs = await _repo.GetBlogAsync();
             var blogToReturn = _mapper.Map<IEnumerable<Blog12M_Dto>>(blogs);
             return Ok(blogToReturn);
+
+        }
+
+
+
+        //post create
+
+        [HttpGet("Posts")]
+        public async Task<ActionResult<IEnumerable<Post_Dto>>> GetPosts()
+        {
+            var posts = await _repo.GetPostsAsync();
+            return Ok(posts);
+        }
+
+        [HttpGet("Posts/{id}")]
+        public async Task<ActionResult<IEnumerable<Post_Dto>>> GetPost(int id)
+        {
+            var posts = await _repo.GetPostByIdAsync(id);
+            return Ok(posts);
+        }
+
+
+
+        [HttpPost("Posts")]
+        public async Task<ActionResult<Post>> CreatePost(PostUpdateDto pt)
+        {
+            await _repo.SavePostAsync(pt);
+            //Below 2 line to show the list of blogs
+            var blogs = await _repo.GetBlogAsync();
+            var userToReturn = _mapper.Map<IEnumerable<Blog12M_Dto>>(blogs);
+            return Ok(userToReturn);
+
+        }
+
+        [HttpPut("Posts")]
+        public async Task<ActionResult> UpdatePost(PostUpdateDto pt)
+        {
+            var Selected_post = await _repo.GetPostByIdAsync(pt.PostId);
+            _mapper.Map(pt, Selected_post);
+            await _repo.UpdateSinglePost(Selected_post);
+            var blgtor = _mapper.Map<Post_Dto>(Selected_post);
+            return Ok(blgtor);
+
+        }
+
+        [HttpDelete("Posts")]
+        public async Task<ActionResult> DeletePost(int id)
+        {
+            var Select_post=await _repo.GetPostByIdAsync(id);
+
+            await _repo.DeletePost(Select_post);
+            var posts = await _repo.GetPostsAsync();
+            return Ok(posts);
+
 
         }
 

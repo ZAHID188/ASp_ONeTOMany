@@ -12,6 +12,8 @@ namespace relationshipAPI.Data.Helper
             CreateMap<BlogUpdateDto, Blog12M>();
             CreateMap<Post, Post_Dto>();
 
+            CreateMap<PostUpdateDto, Post>();
+
 
         }
     }

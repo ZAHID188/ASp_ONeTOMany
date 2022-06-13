@@ -1,4 +1,5 @@
-﻿using relationshipAPI.Model.One_TO_many;
+﻿using relationshipAPI.Data.Dtos.One_TO_Many;
+using relationshipAPI.Model.One_TO_many;
 
 namespace relationshipAPI.Interfaces
 {
@@ -7,13 +8,24 @@ namespace relationshipAPI.Interfaces
         void Update(Blog12M blog);
         Task<bool> SaveAllAsync();
         Task<bool> UpdateSingle(Blog12M blog);
+        Task<bool> UpdateSinglePost(Post blog);
+
         Task<bool> DeleteBlog(Blog12M blog);
+        Task<bool> DeletePost(Post pt);
 
 
-        Task<bool> SaveAsync(Blog12M blog);
+
+        Task<bool> SaveAsync(BlogUpdateDto blog);
+        Task<bool> SavePostAsync(PostUpdateDto blog);
+
 
         Task<IEnumerable<Blog12M>> GetBlogAsync();
+        Task<IEnumerable<Post>> GetPostsAsync();
+
+
         Task<Blog12M> GetBlogByIdAsync(int id);
+        Task<Post> GetPostByIdAsync(int id);
+
         Task<Blog12M> GetBlogByBlogNameAsync(String Blogname);
 
 
